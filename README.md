@@ -11,7 +11,6 @@
 
 ## Usage ##
 * When you edit the file(i.e. `PHP`), when you need to put a `$` sign, you just need to input **placeholder**(i.e. `vv `, note: here is a space after`vv`), the plugin will replace this placeholder by PHP Dollar `$` sign.
-* Default key-map: <kbd>ctrl+alt+l</kbd>
 
 ##  Customize ##
 Edit [VvPhpDollar.sublime-settings][vv_php_dollar_settings] file
@@ -25,17 +24,6 @@ Edit [VvPhpDollar.sublime-settings][vv_php_dollar_settings] file
     ]
 }
 ```
-Edit [Default.sublime-keymap][default_key_map] file
-* For **key binding**
-```json
-[
-{
-    "keys":["ctrl+alt+l"],
-    "comand":"vv_php_dollar"
-}
-]
-```
 [pck-ctrl]: http://wbond.net/sublime_packages/package_control "Sublime Package Control by wbond"
 [github]: https://github.com/ZhaonanLi/VvPhpDollar "VvPHPDollar by Zhaonan Li"
 [vv_php_dollar_settings]: VvPhpDollar.sublime-settings "VvPhpDollar.sublime-settings"
-[default_key_map]: Default.sublime-keymap "Default.sublime-keymap"
