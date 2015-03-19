@@ -49,7 +49,7 @@ class VvPhpDollar():
 
 
     def __refresh_settings(self):
-        self.vv_sign = self.vv_settings.get("vv_sign", '')
+        self.vv_sign = self.vv_settings.get("vv_sign", None)
         if not self.vv_sign:
             print ("Please add value of vv_sign into " +\
                    self.SETTINGS_FILE_NAME + " file.")
