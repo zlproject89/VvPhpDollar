@@ -67,6 +67,11 @@ class VvPhpDollar():
     def replace_vv_sign_by_dollar(self, view):
         vv_sign_len = len(self.vv_sign)
 
+        # Fix the issue that breaks functionality for Ctrl+Z
+        historyCmd = view.command_history(1)
+        if historyCmd[0] == 'vv_php_dollar':
+            return
+
         # Locate the last edit regions.
         for last_edit_region in view.sel():
             last_begin = last_edit_region.begin()
@@ -78,13 +83,8 @@ class VvPhpDollar():
                                                     last_end)
 
                 if view.substr(possible_vv_region) == self.vv_sign:
-                    # A dirty patch for CTRL+Z failure
-                    view.sel().subtract(possible_vv_region)
-                    # Do text replacement
                     view.run_command("vv_php_dollar",
                                      {"begin": possible_vv_region.begin(), "end": possible_vv_region.end()})
-                    # A dirty patch for CTRL+Z failure
-                    view.sel().add(sublime.Region(possible_vv_region.begin()+1))
 
 
 class VvPhpDollarCommand(sublime_plugin.TextCommand):
