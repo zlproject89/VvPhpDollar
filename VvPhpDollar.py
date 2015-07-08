@@ -45,7 +45,7 @@ class VvPhpDollar():
     def __load_settings(self):
         self.vv_settings = sublime.load_settings(self.SETTINGS_FILE_NAME)
         self.__refresh_settings()
-        self.vv_settings.add_on_change(self.SETTINGS_CALLBACK_KEY, 
+        self.vv_settings.add_on_change(self.SETTINGS_CALLBACK_KEY,
                                        self.__refresh_settings)
 
     def __refresh_settings(self):
