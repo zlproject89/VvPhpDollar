@@ -78,8 +78,13 @@ class VvPhpDollar():
                                                     last_end)
 
                 if view.substr(possible_vv_region) == self.vv_sign:
+                    # A dirty patch for CTRL+Z failure
+                    view.sel().subtract(possible_vv_region)
+                    # Do text replacement
                     view.run_command("vv_php_dollar",
                                      {"begin": possible_vv_region.begin(), "end": possible_vv_region.end()})
+                    # A dirty patch for CTRL+Z failure
+                    view.sel().add(sublime.Region(possible_vv_region.begin()+1))
 
 
 class VvPhpDollarCommand(sublime_plugin.TextCommand):
