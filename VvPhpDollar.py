@@ -65,12 +65,18 @@ class VvPhpDollar():
         return syntax
 
     def replace_vv_sign_by_dollar(self, view):
-        vv_sign_len = len(self.vv_sign)
+        # Early break
+        historyCmd = view.command_history(0)
+        if not historyCmd[0] == 'insert' or \
+           not historyCmd[1]['characters'] == self.vv_sign[-1]:
+            return
 
         # Fix the issue that breaks functionality for Ctrl+Z
         historyCmd = view.command_history(1)
         if historyCmd[0] == 'vv_php_dollar':
             return
+
+        vv_sign_len = len(self.vv_sign)
 
         # Locate the last edit regions.
         for last_edit_region in view.sel():
