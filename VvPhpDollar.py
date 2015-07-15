@@ -45,7 +45,7 @@ class VvPhpDollar():
     def __load_settings(self):
         self.vv_settings = sublime.load_settings(self.SETTINGS_FILE_NAME)
         self.__refresh_settings()
-        self.vv_settings.add_on_change(self.SETTINGS_CALLBACK_KEY, 
+        self.vv_settings.add_on_change(self.SETTINGS_CALLBACK_KEY,
                                        self.__refresh_settings)
 
     def __refresh_settings(self):
@@ -65,6 +65,17 @@ class VvPhpDollar():
         return syntax
 
     def replace_vv_sign_by_dollar(self, view):
+        # Early break
+        historyCmd = view.command_history(0)
+        if not historyCmd[0] == 'insert' or \
+           not historyCmd[1]['characters'] == self.vv_sign[-1]:
+            return
+
+        # Fix the issue that breaks functionality for Ctrl+Z
+        historyCmd = view.command_history(1)
+        if historyCmd[0] == 'vv_php_dollar':
+            return
+
         vv_sign_len = len(self.vv_sign)
 
         # Locate the last edit regions.
